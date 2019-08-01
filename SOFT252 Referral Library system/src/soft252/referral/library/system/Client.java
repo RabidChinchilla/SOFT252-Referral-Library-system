@@ -18,5 +18,9 @@ public class Client {
     
     List<Object> resourcesBorrowed = new ArrayList<Object>();
     
+    Client(String ID, String password){
+        this.ID = ID;
+        this.password = password;
+    }
     
 }

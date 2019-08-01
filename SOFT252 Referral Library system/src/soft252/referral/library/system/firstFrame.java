@@ -117,7 +117,14 @@ public class firstFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(firstFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
+        Admin admin1 = new Admin("admin001", "ultimate987");      
+        Client user1 = new Client("user001", "education");
+        Client user2 = new Client("user002", "killingtime");
+        Client user3 = new Client("user003", "movies");
+        Client user4 = new Client("user004", "password");
+        Client user5 = new Client("user005", "books");
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

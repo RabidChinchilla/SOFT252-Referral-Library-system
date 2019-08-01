@@ -12,4 +12,8 @@ package soft252.referral.library.system;
 public class Admin extends Client{
     protected boolean adminPrivileges = true;
     
+    Admin(String ID, String password){
+        super(ID, password);
+    }
+    
 }
