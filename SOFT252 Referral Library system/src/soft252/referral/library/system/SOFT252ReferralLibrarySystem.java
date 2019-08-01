@@ -5,6 +5,9 @@
  */
 package soft252.referral.library.system;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Gearing
@@ -16,6 +19,10 @@ public class SOFT252ReferralLibrarySystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        List<Client> userList = new ArrayList();
+        List<Admin> adminList = new ArrayList();
+        
+        new firstFrame().setVisible(true);
     }
     
 }

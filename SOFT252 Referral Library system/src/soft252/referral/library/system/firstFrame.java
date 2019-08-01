@@ -1,6 +1,8 @@
 package soft252.referral.library.system;
 
 import java.awt.event.WindowEvent;
+import static soft252.referral.library.system.accountCreator.adminList;
+import static soft252.referral.library.system.accountCreator.userList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -142,12 +144,21 @@ public class firstFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
         
-        Admin admin1 = new Admin("admin001", "ultimate987");      
-        Client user1 = new Client("user001", "education");
-        Client user2 = new Client("user002", "killingtime");
-        Client user3 = new Client("user003", "movies");
-        Client user4 = new Client("user004", "password");
-        Client user5 = new Client("user005", "books");
+        accountCreator.createAdmin("admin001", "ultimate987");      
+        accountCreator.createUser("user001", "education");
+        accountCreator.createUser("user002", "killingtime");
+        accountCreator.createUser("user003", "movies");
+        accountCreator.createUser("user004", "password");
+        accountCreator.createUser("user005", "books");
+        
+        for(Client user : userList) { 
+            System.out.println(user);
+        }
+        
+        for(Admin admin : adminList) { 
+            System.out.println(admin);
+        }
+        
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

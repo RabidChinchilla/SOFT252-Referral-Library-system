@@ -13,10 +13,11 @@ import java.util.List;
  * @author Gearing
  */
 public class Client {
+    
     protected String ID;
     protected String password;
     
-    List<Object> resourcesBorrowed = new ArrayList<Object>();
+    List<Object> resourcesBorrowed = new ArrayList();
     
     Client(String ID, String password){
         this.ID = ID;
