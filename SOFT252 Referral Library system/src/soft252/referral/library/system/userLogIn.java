@@ -5,6 +5,9 @@
  */
 package soft252.referral.library.system;
 
+import javax.swing.JOptionPane;
+import static soft252.referral.library.system.accountCreator.userList;
+
 /**
  *
  * @author Gearing
@@ -124,7 +127,21 @@ public class userLogIn extends javax.swing.JFrame {
         String userID = userIDText.getText();
         String password = String.valueOf(userPasswordField.getPassword());
         
+        Boolean loginSuccessful = false;
         
+        for (Client user: userList){
+            if (user.ID.equals(userID) && user.password.equals(password)){
+                loginSuccessful = true;
+            }
+        }
+        
+        if (loginSuccessful.equals(true)){
+            new userFunctions().setVisible(true);
+            dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Incorrect user ID or Password");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -144,20 +144,20 @@ public class firstFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
         
-        accountCreator.createAdmin("admin001", "ultimate987");      
-        accountCreator.createUser("user001", "education");
-        accountCreator.createUser("user002", "killingtime");
-        accountCreator.createUser("user003", "movies");
-        accountCreator.createUser("user004", "password");
-        accountCreator.createUser("user005", "books");
-        
-        for(Client user : userList) { 
-            System.out.println(user);
-        }
-        
-        for(Admin admin : adminList) { 
-            System.out.println(admin);
-        }
+//        accountCreator.createAdmin("admin001", "ultimate987");      
+//        accountCreator.createUser("user001", "education");
+//        accountCreator.createUser("user002", "killingtime");
+//        accountCreator.createUser("user003", "movies");
+//        accountCreator.createUser("user004", "password");
+//        accountCreator.createUser("user005", "books");
+//        
+//        for(Client user : userList) { 
+//            System.out.println(user);
+//        }
+//        
+//        for(Admin admin : adminList) { 
+//            System.out.println(admin);
+//        }
         
         
         /* Create and display the form */
