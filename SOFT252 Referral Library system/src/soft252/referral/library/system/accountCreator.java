@@ -16,6 +16,7 @@ public class accountCreator {
     
     protected static List<Client> userList = new ArrayList();
     protected static List<Admin> adminList = new ArrayList();
+    protected static List<resources> resourceList = new ArrayList();
     
     private static accountCreator instance = new accountCreator();
     
@@ -34,5 +35,10 @@ public class accountCreator {
     public static void createUser(String ID, String Password){
         Client user = new Client(ID, Password);
         userList.add(user);
+    }
+    
+    public static void createResource(String catagorey, String ID, String title, String type){
+        resources resource = new resources(catagorey, ID, title, type);
+        resourceList.add(resource);
     }
 }
