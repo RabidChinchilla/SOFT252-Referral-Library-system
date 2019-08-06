@@ -37,7 +37,7 @@ public class accountCreator {
         userList.add(user);
     }
     
-    public static void createResource(String catagorey, String ID, String title, String type){
+    public static void createResource(String catagorey, String title, String type){
         resources resource = new resources(catagorey, title, type);
         resourceList.add(resource);
     }
