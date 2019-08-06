@@ -11,7 +11,7 @@ package soft252.referral.library.system;
  */
 public class resources {
     protected String catagorey;
-    protected String resourceID;
+    //protected String resourceID;
     protected String title;
     protected String resourceType;
     
@@ -21,9 +21,9 @@ public class resources {
     protected int rating = 0;
     
     
-    resources(String catagorey, String ID, String title, String type){
+    resources(String catagorey, String title, String type){
         this.catagorey = catagorey;
-        this.resourceID = ID;
+        //this.resourceID = ID;
         this.title = title;
         this.resourceType = type;
     }
