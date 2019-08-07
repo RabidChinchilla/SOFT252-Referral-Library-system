@@ -8,6 +8,7 @@ package soft252.referral.library.system;
 import java.util.ArrayList;
 import java.util.List;
 import static soft252.referral.library.system.accountCreator.adminList;
+import static soft252.referral.library.system.accountCreator.resourceList;
 import static soft252.referral.library.system.accountCreator.userList;
 
 /**
@@ -31,14 +32,37 @@ public class SOFT252ReferralLibrarySystem {
         accountCreator.createUser("user004", "password");
         accountCreator.createUser("user005", "books");
         
+        accountCreator.createResource("000 - Computer science, information & general works", "Thinking In Java", "Book");
+        accountCreator.createResource("000 - Computer science, information & general works", "Programming in Unity", "Book");
+        accountCreator.createResource("100 - Philosophy and psychology", "Socrates Teachings", "Book");
+        accountCreator.createResource("100 - Philosophy and psychology", "Psychology basics", "Book");
+        accountCreator.createResource("200 – Religion", "Passion of the christ", "DVD");
+        accountCreator.createResource("200 – Religion", "The bible", "Book");
+        accountCreator.createResource("300 – Social sciences", "Social Studies", "DVD");
+        accountCreator.createResource("300 – Social sciences", "The Tipping Point", "Book");
+        accountCreator.createResource("400 – Language", "French for dummies", "Book");
+        accountCreator.createResource("400 – Language", "German lessons", "DVD");
+        accountCreator.createResource("400 – Language", "Learn Japanese", "Book");
+        accountCreator.createResource("500 – Pure Science", "Chemistry basics", "Book");
+        accountCreator.createResource("500 – Pure Science", "Physics basics", "Book");
+        accountCreator.createResource("500 – Pure Science", "Biology basics", "Book");
+        accountCreator.createResource("500 – Pure Science", "AQA Biology revision guide", "Book");
+        accountCreator.createResource("600 – Technology", "How it's made", "DVD");
+        accountCreator.createResource("600 – Technology", "The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies", "Book");
+        accountCreator.createResource("700 – Arts & recreation", "The joy of painting", "DVD");
+        accountCreator.createResource("800 – Literature", "Of Mice and Men", "Book");
+        accountCreator.createResource("900 – History & geography", "General history of the world", "Book");
+        
+        for (resources resource : resourceList){
+            System.out.println(resource.catagorey + " " + resource.title + " " + resource.resourceType);
+        }
+        
         for(Client user : userList) { 
-            System.out.println(user.ID);
-            System.out.println(user.password);
+            System.out.println(user.ID + " " + user.password);
         }
         
         for(Admin admin : adminList) { 
-            System.out.println(admin.ID);
-            System.out.println(admin.password);
+            System.out.println(admin.ID + " " + admin.password);
         }
         
         new firstFrame().setVisible(true);
