@@ -17,7 +17,8 @@ public class userFunctions extends javax.swing.JFrame {
     public userFunctions() {
         initComponents();
     }
-
+    
+    //welcomeMsg.setText("Welcome back ");
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,27 +28,28 @@ public class userFunctions extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        welcomeMsg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("User Functions");
+        welcomeMsg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        welcomeMsg.setText("Welcome back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addComponent(jLabel1)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(welcomeMsg)
+                .addContainerGap(300, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addComponent(welcomeMsg)
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         pack();
@@ -86,9 +88,10 @@ public class userFunctions extends javax.swing.JFrame {
                 new userFunctions().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel welcomeMsg;
     // End of variables declaration//GEN-END:variables
 }
