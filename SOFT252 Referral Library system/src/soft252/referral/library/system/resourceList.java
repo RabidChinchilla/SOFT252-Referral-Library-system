@@ -5,6 +5,10 @@
  */
 package soft252.referral.library.system;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import static soft252.referral.library.system.accountCreator.resourceList;
+
 /**
  *
  * @author Gearing
@@ -16,6 +20,7 @@ public class resourceList extends javax.swing.JFrame {
      */
     public resourceList() {
         initComponents();
+        showResources();
     }
 
     /**
@@ -27,17 +32,33 @@ public class resourceList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        resourceTable = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jScrollPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        resourceTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        resourceTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Category", "Title", "Currently Rented", "Days until return", "Resource Type"
+            }
+        ));
+        jScrollPane1.setViewportView(resourceTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
         );
 
         pack();
@@ -77,7 +98,25 @@ public class resourceList extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void showResources(){
+        DefaultTableModel tableModel = (DefaultTableModel) resourceTable.getModel();
+        
+        Object rowData[] = new Object[5];
+        
+        for (resources resource : resourceList){
+            rowData[0] = resource.catagorey;
+            rowData[1] = resource.title;
+            rowData[2] = resource.borrowed;
+            rowData[3] = resource.daysBorrowed;
+            rowData[4] = resource.resourceType;
+            tableModel.addRow(rowData);
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable resourceTable;
     // End of variables declaration//GEN-END:variables
 }

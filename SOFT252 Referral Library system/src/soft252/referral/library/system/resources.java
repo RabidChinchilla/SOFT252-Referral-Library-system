@@ -15,8 +15,8 @@ public class resources {
     protected String title;
     protected String resourceType;
     
-    protected boolean borrowed;
-    protected boolean borrowedLong;
+    protected boolean borrowed = false;
+    protected boolean borrowedLong = false;
     protected int daysBorrowed = 0;
     protected int rating = 0;
     
