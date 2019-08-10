@@ -5,6 +5,10 @@
  */
 package soft252.referral.library.system;
 
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+import static soft252.referral.library.system.accountCreator.resourceList;
+
 /**
  *
  * @author Gearing
@@ -16,6 +20,16 @@ public class borrowResource extends javax.swing.JFrame {
      */
     public borrowResource() {
         initComponents();
+        showResources();
+        
+//        String[] resources = {};
+//        Integer i = 0;
+//        for (resources resource : resourceList){
+//            resources[i] = resource.catagorey + " " + resource.title + " " + resource.resourceType;
+//            i = i + 1;
+//        }
+//        
+//        resourceComboBox = new JComboBox(resources);
     }
 
     /**
@@ -27,17 +41,32 @@ public class borrowResource extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        availableResources = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        availableResources.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Category", "Title", "Resource Type"
+            }
+        ));
+        jScrollPane1.setViewportView(availableResources);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 73, Short.MAX_VALUE))
         );
 
         pack();
@@ -77,7 +106,29 @@ public class borrowResource extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void showResources(){
+        DefaultTableModel tableModel = (DefaultTableModel) availableResources.getModel();
+        
+        Object rowData[] = new Object[3];
+        
+        for (resources resource : resourceList){
+            if (resource.borrowed == false){
+                rowData[0] = resource.catagorey;
+                rowData[1] = resource.title;
+                rowData[2] = resource.resourceType;
+                tableModel.addRow(rowData);
+            }
+//            rowData[0] = resource.catagorey;
+//            rowData[1] = resource.title;
+//            rowData[2] = resource.resourceType;
+//            tableModel.addRow(rowData);
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable availableResources;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

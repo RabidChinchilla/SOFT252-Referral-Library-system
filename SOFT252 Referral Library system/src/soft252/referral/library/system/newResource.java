@@ -142,7 +142,7 @@ public class newResource extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Please Give the resource a title");
         }
         else{
-            accountCreator.createResource(category, title, type);
+            accountCreator.createResource(category, title, type, false);
             JOptionPane.showMessageDialog(rootPane, "Resource created successfully");
             dispose();
         }

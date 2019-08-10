@@ -32,26 +32,26 @@ public class SOFT252ReferralLibrarySystem {
         accountCreator.createUser("user004", "password");
         accountCreator.createUser("user005", "books");
         
-        accountCreator.createResource("000 - Computer science, information & general works", "Thinking In Java", "Book");
-        accountCreator.createResource("000 - Computer science, information & general works", "Programming in Unity", "Book");
-        accountCreator.createResource("100 - Philosophy and psychology", "Socrates Teachings", "Book");
-        accountCreator.createResource("100 - Philosophy and psychology", "Psychology basics", "Book");
-        accountCreator.createResource("200 – Religion", "Passion of the christ", "DVD");
-        accountCreator.createResource("200 – Religion", "The bible", "Book");
-        accountCreator.createResource("300 – Social sciences", "Social Studies", "DVD");
-        accountCreator.createResource("300 – Social sciences", "The Tipping Point", "Book");
-        accountCreator.createResource("400 – Language", "French for dummies", "Book");
-        accountCreator.createResource("400 – Language", "German lessons", "DVD");
-        accountCreator.createResource("400 – Language", "Learn Japanese", "Book");
-        accountCreator.createResource("500 – Pure Science", "Chemistry basics", "Book");
-        accountCreator.createResource("500 – Pure Science", "Physics basics", "Book");
-        accountCreator.createResource("500 – Pure Science", "Biology basics", "Book");
-        accountCreator.createResource("500 – Pure Science", "AQA Biology revision guide", "Book");
-        accountCreator.createResource("600 – Technology", "How it's made", "DVD");
-        accountCreator.createResource("600 – Technology", "The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies", "Book");
-        accountCreator.createResource("700 – Arts & recreation", "The joy of painting", "DVD");
-        accountCreator.createResource("800 – Literature", "Of Mice and Men", "Book");
-        accountCreator.createResource("900 – History & geography", "General history of the world", "Book");
+        accountCreator.createResource("000 - Computer science, information & general works", "Thinking In Java", "Book", false);
+        accountCreator.createResource("000 - Computer science, information & general works", "Programming in Unity", "Book", false);
+        accountCreator.createResource("100 - Philosophy and psychology", "Socrates Teachings", "Book", false);
+        accountCreator.createResource("100 - Philosophy and psychology", "Psychology basics", "Book", false);
+        accountCreator.createResource("200 – Religion", "Passion of the christ", "DVD", true);
+        accountCreator.createResource("200 – Religion", "The bible", "Book", false);
+        accountCreator.createResource("300 – Social sciences", "Social Studies", "DVD", true);
+        accountCreator.createResource("300 – Social sciences", "The Tipping Point", "Book", false);
+        accountCreator.createResource("400 – Language", "French for dummies", "Book", false);
+        accountCreator.createResource("400 – Language", "German lessons", "DVD", true);
+        accountCreator.createResource("400 – Language", "Learn Japanese", "Book", false);
+        accountCreator.createResource("500 – Pure Science", "Chemistry basics", "Book", false);
+        accountCreator.createResource("500 – Pure Science", "Physics basics", "Book", false);
+        accountCreator.createResource("500 – Pure Science", "Biology basics", "Book", false);
+        accountCreator.createResource("500 – Pure Science", "AQA Biology revision guide", "Book", false);
+        accountCreator.createResource("600 – Technology", "How it's made", "DVD", true);
+        accountCreator.createResource("600 – Technology", "The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies", "Book", false);
+        accountCreator.createResource("700 – Arts & recreation", "The joy of painting", "DVD", true);
+        accountCreator.createResource("800 – Literature", "Of Mice and Men", "Book", false);
+        accountCreator.createResource("900 – History & geography", "General history of the world", "Book", false);
         
         for (resources resource : resourceList){
             System.out.println(resource.catagorey + " " + resource.title + " " + resource.resourceType);

@@ -21,10 +21,11 @@ public class resources {
     protected int rating = 0;
     
     
-    resources(String catagorey, String title, String type){
+    resources(String catagorey, String title, String type, boolean isBorrowed){
         this.catagorey = catagorey;
         //this.resourceID = ID;
         this.title = title;
         this.resourceType = type;
+        this.borrowed = isBorrowed;
     }
 }
