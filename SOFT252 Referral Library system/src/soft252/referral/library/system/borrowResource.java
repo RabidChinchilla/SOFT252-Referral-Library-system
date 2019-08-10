@@ -175,13 +175,13 @@ public class borrowResource extends javax.swing.JFrame {
         System.out.println(selectedResource);
         
         for (resources resource : resourceList){
-            if (resource.title == selectedResource){
+            if (resource.title.equals(selectedResource)){
                 System.out.println("Resource Match");
                 System.out.println(currentUser);
                 for (Client user : userList){
-                    if (user.ID == currentUser){
+                    if (user.ID.equals(currentUser)){
                         System.out.println("Client Match");
-                        user.resourcesBorrowed.add(resource);
+                        user.resourcesBorrowed.add(resource.title);
                         System.out.println(user.resourcesBorrowed);
                     }
                 }
