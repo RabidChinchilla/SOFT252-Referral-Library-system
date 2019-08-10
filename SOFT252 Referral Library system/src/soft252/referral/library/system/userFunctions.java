@@ -11,11 +11,18 @@ package soft252.referral.library.system;
  */
 public class userFunctions extends javax.swing.JFrame {
 
+    String currentUser;
     /**
      * Creates new form userFunctions
      */
     public userFunctions() {
         initComponents();
+    }
+    
+    public userFunctions(String User) {
+        initComponents();
+        
+        currentUser = User;
     }
     
     
@@ -88,7 +95,8 @@ public class userFunctions extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new borrowResource().setVisible(true);
+        new borrowResource(currentUser).setVisible(true);
+        System.out.println(currentUser);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

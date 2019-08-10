@@ -8,6 +8,7 @@ package soft252.referral.library.system;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import static soft252.referral.library.system.accountCreator.resourceList;
+import static soft252.referral.library.system.accountCreator.userList;
 
 /**
  *
@@ -15,6 +16,7 @@ import static soft252.referral.library.system.accountCreator.resourceList;
  */
 public class borrowResource extends javax.swing.JFrame {
 
+    String currentUser;
     /**
      * Creates new form borrowResource
      */
@@ -31,7 +33,15 @@ public class borrowResource extends javax.swing.JFrame {
 //        
 //        resourceComboBox = new JComboBox(resources);
     }
-
+    
+    public borrowResource(String User) {
+        initComponents();
+        showResources();
+        currentUser = User;
+    }
+    
+    resources selectedBook;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +53,8 @@ public class borrowResource extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         availableResources = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,21 +68,50 @@ public class borrowResource extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(availableResources);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("Borrow Selected Resource");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Selected the Resource you would like to borrow");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 73, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        getSelected();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,9 +167,33 @@ public class borrowResource extends javax.swing.JFrame {
         }
         
     }
+    
+    protected void getSelected(){
+        int column = 1;
+        int row = availableResources.getSelectedRow();
+        String selectedResource = availableResources.getValueAt(row, column).toString();
+        System.out.println(selectedResource);
+        
+        for (resources resource : resourceList){
+            if (resource.title == selectedResource){
+                System.out.println("Resource Match");
+                System.out.println(currentUser);
+                for (Client user : userList){
+                    if (user.ID == currentUser){
+                        System.out.println("Client Match");
+                        user.resourcesBorrowed.add(resource);
+                        System.out.println(user.resourcesBorrowed);
+                    }
+                }
+            }
+            //resource.borrowed == true;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable availableResources;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

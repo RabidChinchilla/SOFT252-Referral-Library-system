@@ -16,7 +16,8 @@ import static soft252.referral.library.system.accountCreator.userList;
  * @author Gearing
  */
 public class SOFT252ReferralLibrarySystem {
-
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -24,6 +25,7 @@ public class SOFT252ReferralLibrarySystem {
         // TODO code application logic here
 //        List<Client> userList = new ArrayList();
 //        List<Admin> adminList = new ArrayList();
+                
         
         accountCreator.createAdmin("admin001", "ultimate987");      
         accountCreator.createUser("user001", "education");

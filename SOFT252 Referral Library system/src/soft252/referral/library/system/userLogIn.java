@@ -136,7 +136,8 @@ public class userLogIn extends javax.swing.JFrame {
         }
         
         if (loginSuccessful.equals(true)){
-            new userFunctions().setVisible(true);
+            new userFunctions(userID).setVisible(true);
+            System.out.println(userID);
             dispose();
         }
         else{
