@@ -5,6 +5,7 @@
  */
 package soft252.referral.library.system;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static soft252.referral.library.system.accountCreator.resourceList;
 import static soft252.referral.library.system.accountCreator.userList;
@@ -43,6 +44,8 @@ public class userBorrowedResources extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         userBorrowed = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,19 +59,58 @@ public class userBorrowedResources extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(userBorrowed);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setText("Return Selected Resource");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:]
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        returnResource();
+        //showBorrowedResources(currentUser);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,11 +155,11 @@ public class userBorrowedResources extends javax.swing.JFrame {
         System.out.println("showBorrowedResources called successfully");
         
         for (Client user : userList){
-            System.out.println("------------------");
-            System.out.println(user.ID);
-            System.out.println(thisUser);
+            //System.out.println("------------------");
+            //System.out.println(user.ID);
+            //System.out.println(thisUser);
             if (thisUser.equals(user.ID)){
-                System.out.println("Client Match for borrowed resources");
+                //System.out.println("Client Match for borrowed resources");
                 for (Object resourceBorrowed : user.resourcesBorrowed){
                     for (resources resource : resourceList){
                         if (resourceBorrowed.equals(resource.title)){
@@ -132,8 +174,37 @@ public class userBorrowedResources extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void returnResource(){
+        int column = 1;
+        int row = userBorrowed.getSelectedRow();
+        String selectedResource = userBorrowed.getValueAt(row, column).toString();
+        System.out.println(selectedResource);
+        
+        for (Client user : userList){
+            //System.out.println("------------------");
+            //System.out.println(user.ID);
+            //System.out.println(thisUser);
+            if (currentUser.equals(user.ID)){
+                //System.out.println("Client Match for borrowed resources");
+                for (Object resourceBorrowed : user.resourcesBorrowed){
+                    System.out.println("-------");
+                    System.out.println(user.resourcesBorrowed);
+                    if (selectedResource.equals(resourceBorrowed)){
+                        user.resourcesBorrowed.remove(resourceBorrowed);
+                        System.out.println(user.resourcesBorrowed);
+                        DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
+                        tableModel.setRowCount(0);
+                        showBorrowedResources(currentUser);
+                    }
+                }
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable userBorrowed;
     // End of variables declaration//GEN-END:variables
