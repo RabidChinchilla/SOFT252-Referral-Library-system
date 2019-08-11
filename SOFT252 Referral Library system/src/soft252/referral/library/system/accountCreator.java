@@ -37,8 +37,8 @@ public class accountCreator {
         userList.add(user);
     }
     
-    public static void createResource(String catagorey, String title, String type, boolean isBorrowed){
-        resources resource = new resources(catagorey, title, type, isBorrowed);
+    public static void createResource(String catagorey, String title, String type, boolean borrowed, String borrowType){
+        resources resource = new resources(catagorey, title, type, borrowed, borrowType);
         resourceList.add(resource);
     }
 }

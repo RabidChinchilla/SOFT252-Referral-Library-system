@@ -14,18 +14,17 @@ public class resources {
     //protected String resourceID;
     protected String title;
     protected String resourceType;
-    
-    protected boolean borrowed = false;
-    protected boolean borrowedLong = false;
+    protected boolean borrowed;
+    protected String borrowedType;
     protected int daysBorrowed = 0;
     protected int rating = 0;
     
     
-    resources(String catagorey, String title, String type, boolean isBorrowed){
+    resources(String catagorey, String title, String type, boolean isBorrowed, String borrowTy){
         this.catagorey = catagorey;
         //this.resourceID = ID;
         this.title = title;
         this.resourceType = type;
-        this.borrowed = isBorrowed;
+        this.borrowedType = borrowTy;
     }
 }
