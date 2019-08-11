@@ -22,6 +22,7 @@ public class Client {
     Client(String ID, String password){
         this.ID = ID;
         this.password = password;
+        //this.resourcesBorrowed ;
     }
     
 }

@@ -22,13 +22,14 @@ public class userBorrowedResources extends javax.swing.JFrame {
      */
     public userBorrowedResources() {
         initComponents();
-        showBorrowedResources();
+        showBorrowedResources(currentUser);
     }
     
     public userBorrowedResources(String User) {
-        initComponents();
-        showBorrowedResources();
         currentUser = User;
+        initComponents();
+        showBorrowedResources(currentUser);
+        //currentUser = User;
     }
 
     /**
@@ -104,17 +105,22 @@ public class userBorrowedResources extends javax.swing.JFrame {
         });
     }
     
-    private void showBorrowedResources(){
+    private void showBorrowedResources(String thisUser){
         DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
         
         Object rowData[] = new Object[4];
         
+        System.out.println("showBorrowedResources called successfully");
+        
         for (Client user : userList){
-            if (user.ID.equals(currentUser)){
+            System.out.println("------------------");
+            System.out.println(user.ID);
+            System.out.println(thisUser);
+            if (thisUser.equals(user.ID)){
                 System.out.println("Client Match for borrowed resources");
-                for (Object resourcesBorrowed : user.resourcesBorrowed){
+                for (Object resourceBorrowed : user.resourcesBorrowed){
                     for (resources resource : resourceList){
-                        if (resourcesBorrowed.equals(resource)){
+                        if (resourceBorrowed.equals(resource.title)){
                             rowData[0] = resource.catagorey;
                             rowData[1] = resource.title;
                             rowData[2] = resource.daysBorrowed;
