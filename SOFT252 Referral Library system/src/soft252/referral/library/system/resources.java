@@ -25,6 +25,7 @@ public class resources {
         //this.resourceID = ID;
         this.title = title;
         this.resourceType = type;
+        this.borrowed = isBorrowed;
         this.borrowedType = borrowTy;
     }
 }

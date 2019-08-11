@@ -38,8 +38,8 @@ public class SOFT252ReferralLibrarySystem {
         accountCreator.createResource("000 - Computer science, information & general works", "Programming in Unity", "Book", false, "Short Term");
         accountCreator.createResource("100 - Philosophy and psychology", "Socrates Teachings", "Book", false, "Long Term");
         accountCreator.createResource("100 - Philosophy and psychology", "Psychology basics", "Book", false, "Long Term");
-        accountCreator.createResource("200 – Religion", "Passion of the christ", "DVD", true, "Short Term");
-        accountCreator.createResource("200 – Religion", "The bible", "Book", false, "Refernce");
+        accountCreator.createResource("200 – Religion", "Passion of the christ", "DVD", true, "Reference");
+        accountCreator.createResource("200 – Religion", "The bible", "Book", false, "Reference");
         accountCreator.createResource("300 – Social sciences", "Social Studies", "DVD", true, "Short Term");
         accountCreator.createResource("300 – Social sciences", "The Tipping Point", "Book", false, "Long Term");
         accountCreator.createResource("400 – Language", "French for dummies", "Book", false, "Short Term");

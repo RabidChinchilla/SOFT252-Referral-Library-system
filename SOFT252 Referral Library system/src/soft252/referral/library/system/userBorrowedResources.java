@@ -6,21 +6,29 @@
 package soft252.referral.library.system;
 
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import static soft252.referral.library.system.accountCreator.resourceList;
+import static soft252.referral.library.system.accountCreator.userList;
 
 /**
  *
  * @author Gearing
  */
-public class resourceList extends javax.swing.JFrame {
+public class userBorrowedResources extends javax.swing.JFrame {
 
+    
+    String currentUser;
     /**
-     * Creates new form resourceList
+     * Creates new form userBorrowedResources
      */
-    public resourceList() {
+    public userBorrowedResources() {
         initComponents();
-        showResources();
+        showBorrowedResources();
+    }
+    
+    public userBorrowedResources(String User) {
+        initComponents();
+        showBorrowedResources();
+        currentUser = User;
     }
 
     /**
@@ -33,32 +41,29 @@ public class resourceList extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        resourceTable = new javax.swing.JTable();
+        userBorrowed = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jScrollPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        resourceTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        resourceTable.setModel(new javax.swing.table.DefaultTableModel(
+        userBorrowed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Category", "Title", "Currently Rented", "Days until return", "Resource Type"
+                "Category", "Title", "Days left of rental", "Resource Type"
             }
         ));
-        jScrollPane1.setViewportView(resourceTable);
+        jScrollPane1.setViewportView(userBorrowed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1135, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
         );
 
         pack();
@@ -81,41 +86,49 @@ public class resourceList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(resourceList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(userBorrowedResources.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(resourceList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(userBorrowedResources.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(resourceList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(userBorrowedResources.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(resourceList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(userBorrowedResources.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new resourceList().setVisible(true);
+                new userBorrowedResources().setVisible(true);
             }
         });
     }
     
-    private void showResources(){
-        DefaultTableModel tableModel = (DefaultTableModel) resourceTable.getModel();
+    private void showBorrowedResources(){
+        DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
         
-        Object rowData[] = new Object[5];
+        Object rowData[] = new Object[4];
         
-        for (resources resource : resourceList){
-            rowData[0] = resource.catagorey;
-            rowData[1] = resource.title;
-            rowData[2] = resource.borrowed;
-            rowData[3] = resource.daysBorrowed;
-            rowData[4] = resource.resourceType;
-            tableModel.addRow(rowData);
-        }   
+        for (Client user : userList){
+            if (user.ID.equals(currentUser)){
+                System.out.println("Client Match for borrowed resources");
+                for (Object resourcesBorrowed : user.resourcesBorrowed){
+                    for (resources resource : resourceList){
+                        if (resourcesBorrowed.equals(resource)){
+                            rowData[0] = resource.catagorey;
+                            rowData[1] = resource.title;
+                            rowData[2] = resource.daysBorrowed;
+                            rowData[3] = resource.resourceType;
+                            tableModel.addRow(rowData);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable resourceTable;
+    private javax.swing.JTable userBorrowed;
     // End of variables declaration//GEN-END:variables
 }
