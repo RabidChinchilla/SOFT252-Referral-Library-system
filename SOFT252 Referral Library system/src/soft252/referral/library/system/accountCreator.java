@@ -18,6 +18,8 @@ public class accountCreator {
     protected static List<Admin> adminList = new ArrayList();
     protected static List<resources> resourceList = new ArrayList();
     
+    protected static List<Object> dueDateExtenstions = new ArrayList();
+    
     private static accountCreator instance = new accountCreator();
     
     private accountCreator(){}

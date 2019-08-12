@@ -5,12 +5,16 @@
  */
 package soft252.referral.library.system;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Gearing
  */
 public class Admin extends Client{
     protected boolean adminPrivileges = true;
+    
     
     Admin(String ID, String password){
         super(ID, password);

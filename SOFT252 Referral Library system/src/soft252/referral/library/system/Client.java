@@ -18,6 +18,7 @@ public class Client {
     protected String password;
     
     List<Object> resourcesBorrowed = new ArrayList();
+    List<Object> Reminders = new ArrayList();
     
     Client(String ID, String password){
         this.ID = ID;
