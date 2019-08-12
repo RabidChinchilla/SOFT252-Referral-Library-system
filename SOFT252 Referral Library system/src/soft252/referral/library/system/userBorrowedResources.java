@@ -188,14 +188,27 @@ public class userBorrowedResources extends javax.swing.JFrame {
             if (currentUser.equals(user.ID)){
                 //System.out.println("Client Match for borrowed resources");
                 for (Object resourceBorrowed : user.resourcesBorrowed){
-                    System.out.println("-------");
-                    System.out.println(user.resourcesBorrowed);
+                    //System.out.println("-------");
+                    //System.out.println(user.resourcesBorrowed);
                     if (selectedResource.equals(resourceBorrowed)){
-                        user.resourcesBorrowed.remove(resourceBorrowed);
-                        System.out.println(user.resourcesBorrowed);
-                        DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
-                        tableModel.setRowCount(0);
-                        showBorrowedResources(currentUser);
+                        for (resources originalResource : resourceList){
+                            if (selectedResource.equals(originalResource.title)){
+                                if (originalResource.daysBorrowed < 0){
+                                    int a = JOptionPane.showConfirmDialog(rootPane, "You have a late fee of " + (-0.1 * originalResource.daysBorrowed) + " You must pay it to return this resource", "Late Return", JOptionPane.YES_NO_OPTION);
+                                    if (a == JOptionPane.YES_OPTION){
+                                        
+                                    }
+                                    else if (a == JOptionPane.NO_OPTION){
+                                        
+                                    }
+                                }
+                            }
+                        }
+                        //user.resourcesBorrowed.remove(resourceBorrowed);
+                        //System.out.println(user.resourcesBorrowed);
+                        //DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
+                        //tableModel.setRowCount(0);
+                        //showBorrowedResources(currentUser);
                     }
                 }
             }
