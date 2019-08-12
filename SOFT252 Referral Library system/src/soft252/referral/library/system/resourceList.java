@@ -45,7 +45,7 @@ public class resourceList extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Category", "Title", "Currently Rented", "Days until return", "Resource Type"
+                "Category", "Title", "Currently Rented", "Days until return", "Resource Type", "Rating"
             }
         ));
         jScrollPane1.setViewportView(resourceTable);
@@ -102,7 +102,7 @@ public class resourceList extends javax.swing.JFrame {
     private void showResources(){
         DefaultTableModel tableModel = (DefaultTableModel) resourceTable.getModel();
         
-        Object rowData[] = new Object[5];
+        Object rowData[] = new Object[6];
         
         for (resources resource : resourceList){
             rowData[0] = resource.catagorey;
@@ -110,6 +110,7 @@ public class resourceList extends javax.swing.JFrame {
             rowData[2] = resource.borrowed;
             rowData[3] = resource.daysBorrowed;
             rowData[4] = resource.resourceType;
+            rowData[5] = resource.rating;
             tableModel.addRow(rowData);
         }   
     }

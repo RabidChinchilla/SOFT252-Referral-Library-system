@@ -79,6 +79,11 @@ public class userBorrowedResources extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setText("Rate Resource");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,6 +125,11 @@ public class userBorrowedResources extends javax.swing.JFrame {
         returnResource();
         //showBorrowedResources(currentUser);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        rateResource();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,6 +236,35 @@ public class userBorrowedResources extends javax.swing.JFrame {
                                     tableModel.setRowCount(0);
                                     showBorrowedResources(currentUser);
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private void rateResource(){
+        
+        int column = 1;
+        int row = userBorrowed.getSelectedRow();
+        String selectedResource = userBorrowed.getValueAt(row, column).toString();
+        
+        for (Client user : userList){
+            //System.out.println("------------------");
+            //System.out.println(user.ID);
+            //System.out.println(thisUser);
+            if (currentUser.equals(user.ID)){
+                //System.out.println("Client Match for borrowed resources");
+                for (Object resourceBorrowed : user.resourcesBorrowed){
+                    //System.out.println("-------");
+                    //System.out.println(user.resourcesBorrowed);
+                    if (selectedResource.equals(resourceBorrowed)){
+                        for (resources originalResource : resourceList){
+                            if (selectedResource.equals(originalResource.title)){
+                                Object[] possibilities = {1, 2, 3, 4, 5};
+                                int rating = (int)JOptionPane.showInputDialog(rootPane, "Rate the Resource:\n", "Rating", JOptionPane.PLAIN_MESSAGE, null, possibilities, 1);
+                                originalResource.rating = originalResource.rating + rating;
                             }
                         }
                     }

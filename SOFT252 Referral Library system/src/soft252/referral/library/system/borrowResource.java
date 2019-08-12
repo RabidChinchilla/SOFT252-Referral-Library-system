@@ -65,7 +65,7 @@ public class borrowResource extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Category", "Title", "Resource Type"
+                "Category", "Title", "Resource Type", "Rating"
             }
         ));
         jScrollPane1.setViewportView(availableResources);
@@ -172,13 +172,14 @@ public class borrowResource extends javax.swing.JFrame {
     private void showResources(){
         DefaultTableModel tableModel = (DefaultTableModel) availableResources.getModel();
         
-        Object rowData[] = new Object[3];
+        Object rowData[] = new Object[4];
         
         for (resources resource : resourceList){
             if (resource.borrowed == false){
                 rowData[0] = resource.catagorey;
                 rowData[1] = resource.title;
                 rowData[2] = resource.resourceType;
+                rowData[3] = resource.rating;
                 tableModel.addRow(rowData);
             }
 //            rowData[0] = resource.catagorey;
