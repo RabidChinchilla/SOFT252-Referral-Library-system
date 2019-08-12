@@ -126,6 +126,7 @@ public class borrowResource extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         getSelected();
+        showResources();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -223,6 +224,8 @@ public class borrowResource extends javax.swing.JFrame {
                 }
             }
         }
+        DefaultTableModel tableModel = (DefaultTableModel) availableResources.getModel();
+        tableModel.setRowCount(0);
     }
     
 

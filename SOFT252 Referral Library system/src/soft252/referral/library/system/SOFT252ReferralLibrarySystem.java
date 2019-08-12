@@ -61,6 +61,15 @@ public class SOFT252ReferralLibrarySystem {
         
         for(Client user : userList) { 
             System.out.println(user.ID + " " + user.password);
+            if (user.ID.equals("user005")){
+                user.resourcesBorrowed.add("Of Mice and Men");
+                for (resources resource : resourceList){
+                    if (resource.title.equals("Of Mice and Men")){
+                        resource.borrowed = true;
+                        resource.daysBorrowed = -7;
+                    }
+                }
+            }
         }
         
         for(Admin admin : adminList) { 

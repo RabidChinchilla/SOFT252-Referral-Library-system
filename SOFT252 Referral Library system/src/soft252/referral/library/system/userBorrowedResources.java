@@ -5,6 +5,7 @@
  */
 package soft252.referral.library.system;
 
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static soft252.referral.library.system.accountCreator.resourceList;
@@ -46,6 +47,7 @@ public class userBorrowedResources extends javax.swing.JFrame {
         userBorrowed = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,23 +77,30 @@ public class userBorrowedResources extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setText("Rate Resource");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -194,21 +203,31 @@ public class userBorrowedResources extends javax.swing.JFrame {
                         for (resources originalResource : resourceList){
                             if (selectedResource.equals(originalResource.title)){
                                 if (originalResource.daysBorrowed < 0){
-                                    int a = JOptionPane.showConfirmDialog(rootPane, "You have a late fee of " + (-0.1 * originalResource.daysBorrowed) + " You must pay it to return this resource", "Late Return", JOptionPane.YES_NO_OPTION);
+                                    double lateFee = 0.0;
+                                    lateFee = -0.1 * originalResource.daysBorrowed;
+                                    DecimalFormat formatedLateFee = new DecimalFormat("#0.00");
+                                    String newLateFee = formatedLateFee.format(lateFee);
+                                    int a = JOptionPane.showConfirmDialog(rootPane, "You have a late fee of £" + (newLateFee) + " You must pay it to return this resource", "Late Return", JOptionPane.YES_NO_OPTION);
                                     if (a == JOptionPane.YES_OPTION){
-                                        
+                                        user.resourcesBorrowed.remove(resourceBorrowed);
+                                        System.out.println(user.resourcesBorrowed);
+                                        DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
+                                        tableModel.setRowCount(0);
+                                        showBorrowedResources(currentUser);
                                     }
                                     else if (a == JOptionPane.NO_OPTION){
-                                        
+                                        JOptionPane.showMessageDialog(rootPane, "Late fee not paid, book will remain with you until you can pay the late fee");
                                     }
+                                }
+                                else{
+                                    user.resourcesBorrowed.remove(resourceBorrowed);
+                                    System.out.println(user.resourcesBorrowed);
+                                    DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
+                                    tableModel.setRowCount(0);
+                                    showBorrowedResources(currentUser);
                                 }
                             }
                         }
-                        //user.resourcesBorrowed.remove(resourceBorrowed);
-                        //System.out.println(user.resourcesBorrowed);
-                        //DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
-                        //tableModel.setRowCount(0);
-                        //showBorrowedResources(currentUser);
                     }
                 }
             }
@@ -218,6 +237,7 @@ public class userBorrowedResources extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable userBorrowed;
     // End of variables declaration//GEN-END:variables
