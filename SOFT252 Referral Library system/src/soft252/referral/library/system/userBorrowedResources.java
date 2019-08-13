@@ -217,6 +217,8 @@ public class userBorrowedResources extends javax.swing.JFrame {
         String selectedResource = userBorrowed.getValueAt(row, column).toString();
         System.out.println(selectedResource);
         
+        String removeFromExtensionRequest;
+        
         for (Client user : userList){
             //System.out.println("------------------");
             //System.out.println(user.ID);
@@ -241,6 +243,8 @@ public class userBorrowedResources extends javax.swing.JFrame {
                                         DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
                                         tableModel.setRowCount(0);
                                         showBorrowedResources(currentUser);
+                                        removeFromExtensionRequest = (user.ID + ":" + originalResource.title);
+                                        accountCreator.dueDateExtenstions.remove(removeFromExtensionRequest);
                                     }
                                     else if (a == JOptionPane.NO_OPTION){
                                         JOptionPane.showMessageDialog(rootPane, "Late fee not paid, book will remain with you until you can pay the late fee");
@@ -252,6 +256,8 @@ public class userBorrowedResources extends javax.swing.JFrame {
                                     DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
                                     tableModel.setRowCount(0);
                                     showBorrowedResources(currentUser);
+                                    removeFromExtensionRequest = (user.ID + ":" + originalResource.title);
+                                    accountCreator.dueDateExtenstions.remove(removeFromExtensionRequest);
                                 }
                             }
                         }

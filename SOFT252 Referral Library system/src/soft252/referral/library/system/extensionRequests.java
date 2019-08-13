@@ -53,6 +53,11 @@ public class extensionRequests extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Approve Extension");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Deny Extension");
@@ -82,6 +87,29 @@ public class extensionRequests extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int row = extensionTable.getSelectedRow();
+        String selectedResource = extensionTable.getValueAt(row, 1).toString();
+        String currentUser = extensionTable.getValueAt(row, 0).toString();
+        System.out.println(selectedResource);
+        
+        for (resources resource : resourceList){
+            if (resource.title.equals(selectedResource)){
+                System.out.println("Resource Match");
+                for (Client user : userList){
+                    if (user.ID.equals(currentUser)){
+                        System.out.println("Client Match");
+                        
+                    }
+                }
+            }
+        }
+        DefaultTableModel tableModel = (DefaultTableModel) extensionTable.getModel();
+        tableModel.setRowCount(0);
+        showExtensionRequests();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
