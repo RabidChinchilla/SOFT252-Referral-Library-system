@@ -18,6 +18,8 @@ public class accountCreator {
     protected static List<Admin> adminList = new ArrayList();
     protected static List<resources> resourceList = new ArrayList();
     
+    protected static List<resources> resourceRequestList = new ArrayList();
+    
     protected static List<String> dueDateExtenstions = new ArrayList();
     
     private static accountCreator instance = new accountCreator();
@@ -42,5 +44,10 @@ public class accountCreator {
     public static void createResource(String catagorey, String title, String type, boolean borrowed, String borrowType){
         resources resource = new resources(catagorey, title, type, borrowed, borrowType);
         resourceList.add(resource);
+    }
+    
+    public static void createResourceRequest(String title, String type){
+        resources resource = new resources(null, title, type, false, null);
+        resourceRequestList.add(resource);
     }
 }

@@ -27,7 +27,8 @@ public class SOFT252ReferralLibrarySystem {
 //        List<Admin> adminList = new ArrayList();
                 
         
-        accountCreator.createAdmin("admin001", "ultimate987");      
+        accountCreator.createAdmin("admin001", "ultimate987");
+        accountCreator.createAdmin("admin002", "adminpass");
         accountCreator.createUser("user001", "education");
         accountCreator.createUser("user002", "killingtime");
         accountCreator.createUser("user003", "movies");
