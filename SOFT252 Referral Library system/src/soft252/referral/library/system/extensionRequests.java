@@ -61,6 +61,11 @@ public class extensionRequests extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Deny Extension");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,13 +100,17 @@ public class extensionRequests extends javax.swing.JFrame {
         String currentUser = extensionTable.getValueAt(row, 0).toString();
         System.out.println(selectedResource);
         
+        String removeFromExtensionRequest;
+        
         for (resources resource : resourceList){
             if (resource.title.equals(selectedResource)){
                 System.out.println("Resource Match");
                 for (Client user : userList){
                     if (user.ID.equals(currentUser)){
                         System.out.println("Client Match");
-                        
+                        resource.daysBorrowed = resource.daysBorrowed + 14;
+                        removeFromExtensionRequest = (user.ID + ":" + resource.title);
+                        accountCreator.dueDateExtenstions.remove(removeFromExtensionRequest);
                     }
                 }
             }
@@ -110,6 +119,23 @@ public class extensionRequests extends javax.swing.JFrame {
         tableModel.setRowCount(0);
         showExtensionRequests();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane, "Extension request denied");
+        int row = extensionTable.getSelectedRow();
+        String selectedResource = extensionTable.getValueAt(row, 1).toString();
+        String currentUser = extensionTable.getValueAt(row, 0).toString();
+        for (Client user : userList){
+            if (user.ID.equals(currentUser)){
+                for (resources resource : resourceList){
+                    if (resource.title.equals(selectedResource)){
+                        user.Reminders.add("Your extension request for " + selectedResource + " was denied");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
