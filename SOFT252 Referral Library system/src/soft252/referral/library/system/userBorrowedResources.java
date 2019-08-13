@@ -305,7 +305,8 @@ public class userBorrowedResources extends javax.swing.JFrame {
                     //System.out.println("-------");
                     //System.out.println(user.resourcesBorrowed);
                     if (selectedResource.equals(resourceBorrowed)){
-                        accountCreator.dueDateExtenstions.add(currentUser + ":" + selectedResource);
+                        accountCreator.dueDateExtenstions.add((String)currentUser + ":" + selectedResource);
+                        System.out.println(accountCreator.dueDateExtenstions);                    
                     }
                 }
             }
