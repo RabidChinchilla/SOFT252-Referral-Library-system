@@ -5,6 +5,14 @@
  */
 package soft252.referral.library.system;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import static soft252.referral.library.system.accountCreator.userList;
 
@@ -18,12 +26,12 @@ public class userReminders extends javax.swing.JFrame {
     /**
      * Creates new form userReminders
      */
-    public userReminders() {
+    public userReminders() throws ClassNotFoundException {
         initComponents();
         showReminders();
     }
     
-    public userReminders(String userID) {
+    public userReminders(String userID) throws ClassNotFoundException {
         initComponents();
         currentUser = userID;
         showReminders();
@@ -109,9 +117,24 @@ public class userReminders extends javax.swing.JFrame {
                 user.Reminders.remove(reminder);
             }
         }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("users.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.userList);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\users.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
         DefaultTableModel tableModel = (DefaultTableModel) remindersTable.getModel();
         tableModel.setRowCount(0);
-        showReminders();
+        try {
+            showReminders();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(userReminders.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -144,12 +167,28 @@ public class userReminders extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new userReminders().setVisible(true);
+                try {
+                    new userReminders().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(userReminders.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     
-    private void showReminders(){
+    private void showReminders() throws ClassNotFoundException{
+        try {
+            FileInputStream fileIn = new FileInputStream("users.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.userList = (List<Client>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded users");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
         DefaultTableModel tableModel = (DefaultTableModel) remindersTable.getModel();
         
         Object rowData[] = new Object[1];

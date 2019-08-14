@@ -5,6 +5,7 @@
  */
 package soft252.referral.library.system;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Gearing
  */
-public class Client {
+public class Client implements Serializable{
     
     protected String ID;
     protected String password;

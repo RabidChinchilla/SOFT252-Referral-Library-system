@@ -5,6 +5,15 @@
  */
 package soft252.referral.library.system;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import static java.lang.System.in;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +30,7 @@ public class borrowResource extends javax.swing.JFrame {
     /**
      * Creates new form borrowResource
      */
-    public borrowResource() {
+    public borrowResource() throws ClassNotFoundException {
         initComponents();
         showResources();
         
@@ -35,7 +44,7 @@ public class borrowResource extends javax.swing.JFrame {
 //        resourceComboBox = new JComboBox(resources);
     }
     
-    public borrowResource(String User) {
+    public borrowResource(String User) throws ClassNotFoundException {
         initComponents();
         showResources();
         currentUser = User;
@@ -124,9 +133,17 @@ public class borrowResource extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        getSelected();
-        showResources();
+        try {
+            // TODO add your handling code here:
+            getSelected();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(borrowResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            showResources();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(borrowResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -164,12 +181,42 @@ public class borrowResource extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new borrowResource().setVisible(true);
+                try {
+                    new borrowResource().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(borrowResource.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     
-    private void showResources(){
+    private void showResources() throws ClassNotFoundException{
+        
+        try {
+            FileInputStream fileIn = new FileInputStream("resources.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.resourceList = (List<resources>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded resources");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        try {
+            FileInputStream fileIn = new FileInputStream("users.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.userList = (List<Client>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded resources");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        
         DefaultTableModel tableModel = (DefaultTableModel) availableResources.getModel();
         
         Object rowData[] = new Object[4];
@@ -182,15 +229,11 @@ public class borrowResource extends javax.swing.JFrame {
                 rowData[3] = resource.rating;
                 tableModel.addRow(rowData);
             }
-//            rowData[0] = resource.catagorey;
-//            rowData[1] = resource.title;
-//            rowData[2] = resource.resourceType;
-//            tableModel.addRow(rowData);
         }
         
     }
     
-    protected void getSelected(){
+    protected void getSelected() throws ClassNotFoundException{
         int column = 1;
         int row = availableResources.getSelectedRow();
         String selectedResource = availableResources.getValueAt(row, column).toString();
@@ -235,14 +278,37 @@ public class borrowResource extends javax.swing.JFrame {
                         //user.resourcesBorrowed.add(resource.title);
                         //System.out.println(user.resourcesBorrowed);
                     }
-                    else{
+                    else if (canBorrow == false){
                         JOptionPane.showMessageDialog(rootPane, "You have a resource overdue by 20 days or more, you cannot take out anymore resources");
                     }
                 }
             }
         }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("users.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.userList);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\users.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("resources.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.resourceList);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resources.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
         DefaultTableModel tableModel = (DefaultTableModel) availableResources.getModel();
         tableModel.setRowCount(0);
+        showResources();
     }
     
 

@@ -23,14 +23,12 @@ public class userFunctions extends javax.swing.JFrame {
      */
     public userFunctions() {
         initComponents();
-        displayReminders();
     }
     
     public userFunctions(String User) {
         initComponents();
         currentUser = User;
-        System.out.println("Logged in with " +currentUser);
-        displayReminders();
+        //System.out.println("Logged in with " +currentUser);
     }
     
     
@@ -216,13 +214,6 @@ public class userFunctions extends javax.swing.JFrame {
 
     }
     
-    private void displayReminders(){
-        String reminders;
-        
-        for (Client user : userList){
-            
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

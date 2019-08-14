@@ -5,7 +5,15 @@
  */
 package soft252.referral.library.system;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static soft252.referral.library.system.accountCreator.resourceList;
@@ -22,12 +30,12 @@ public class userBorrowedResources extends javax.swing.JFrame {
     /**
      * Creates new form userBorrowedResources
      */
-    public userBorrowedResources() {
+    public userBorrowedResources() throws ClassNotFoundException {
         initComponents();
         showBorrowedResources(currentUser);
     }
     
-    public userBorrowedResources(String User) {
+    public userBorrowedResources(String User) throws ClassNotFoundException {
         currentUser = User;
         initComponents();
         showBorrowedResources(currentUser);
@@ -133,9 +141,13 @@ public class userBorrowedResources extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        returnResource();
-        //showBorrowedResources(currentUser);
+        try {
+            // TODO add your handling code here:
+            returnResource();
+            //showBorrowedResources(currentUser);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(userBorrowedResources.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -178,12 +190,42 @@ public class userBorrowedResources extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new userBorrowedResources().setVisible(true);
+                try {
+                    new userBorrowedResources().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(userBorrowedResources.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     
-    private void showBorrowedResources(String thisUser){
+    private void showBorrowedResources(String thisUser) throws ClassNotFoundException{
+        
+        try {
+            FileInputStream fileIn = new FileInputStream("resources.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.resourceList = (List<resources>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded resources");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        try {
+            FileInputStream fileIn = new FileInputStream("users.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.userList = (List<Client>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded resources");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        
         DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
         
         Object rowData[] = new Object[4];
@@ -211,12 +253,13 @@ public class userBorrowedResources extends javax.swing.JFrame {
         }
     }
     
-    private void returnResource(){
+    private void returnResource() throws ClassNotFoundException{
         int column = 1;
         int row = userBorrowed.getSelectedRow();
         String selectedResource = userBorrowed.getValueAt(row, column).toString();
         
         String removeFromExtensionRequest;
+        Object toBeRemoved = null;
         
         for (Client user : userList){
             //System.out.println("------------------");
@@ -237,8 +280,9 @@ public class userBorrowedResources extends javax.swing.JFrame {
                                     String newLateFee = formatedLateFee.format(lateFee);
                                     int a = JOptionPane.showConfirmDialog(rootPane, "You have a late fee of £" + (newLateFee) + " You must pay it to return this resource", "Late Return", JOptionPane.YES_NO_OPTION);
                                     if (a == JOptionPane.YES_OPTION){
-                                        user.resourcesBorrowed.remove(resourceBorrowed);
-                                        System.out.println(user.resourcesBorrowed);
+                                        //user.resourcesBorrowed.remove(resourceBorrowed);
+                                        toBeRemoved = resourceBorrowed;
+                                        //System.out.println(user.resourcesBorrowed);
                                         DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
                                         tableModel.setRowCount(0);
                                         showBorrowedResources(currentUser);
@@ -250,8 +294,9 @@ public class userBorrowedResources extends javax.swing.JFrame {
                                     }
                                 }
                                 else{
-                                    user.resourcesBorrowed.remove(resourceBorrowed);
-                                    System.out.println(user.resourcesBorrowed);
+                                    //user.resourcesBorrowed.remove(resourceBorrowed);
+                                    toBeRemoved = resourceBorrowed;
+                                    //System.out.println(user.resourcesBorrowed);
                                     DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
                                     tableModel.setRowCount(0);
                                     showBorrowedResources(currentUser);
@@ -263,6 +308,33 @@ public class userBorrowedResources extends javax.swing.JFrame {
                     }
                 }
             }
+            user.resourcesBorrowed.remove(toBeRemoved);
+        }
+        DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
+        tableModel.setRowCount(0);
+        showBorrowedResources(currentUser);
+        try {
+            FileInputStream fileIn = new FileInputStream("users.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.userList = (List<Client>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("rewritten users");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        try {
+            FileInputStream fileIn = new FileInputStream("resources.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.resourceList = (List<resources>) in.readObject();
+            in.close();
+            fileIn.close();
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
         }
     }
     
@@ -315,6 +387,17 @@ public class userBorrowedResources extends javax.swing.JFrame {
                     }
                 }
             }
+        }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("dueDateExtensions.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.dueDateExtenstions);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\dueDateExtensions.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
         }
     }
 

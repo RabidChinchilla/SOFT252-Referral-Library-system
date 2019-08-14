@@ -5,11 +5,13 @@
  */
 package soft252.referral.library.system;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Gearing
  */
-public class resources {
+public class resources implements Serializable{
     protected String catagorey;
     //protected String resourceID;
     protected String title;

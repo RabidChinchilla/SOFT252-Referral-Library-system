@@ -5,6 +5,14 @@
  */
 package soft252.referral.library.system;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static soft252.referral.library.system.accountCreator.resourceList;
@@ -20,7 +28,7 @@ public class adminPurchaseRequests extends javax.swing.JFrame {
     /**
      * Creates new form adminPurchaseRequests
      */
-    public adminPurchaseRequests() {
+    public adminPurchaseRequests() throws ClassNotFoundException {
         initComponents();
         showPurchaseRequests();
     }
@@ -125,9 +133,24 @@ public class adminPurchaseRequests extends javax.swing.JFrame {
         }
         resourceRequestList.remove(toBeRemoved);
         JOptionPane.showMessageDialog(rootPane, "The purchase request for " + selectedResource + " has been approved");
+        try {
+         FileOutputStream fileOut = new FileOutputStream("resourceRequests.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.resourceRequestList);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resourceRequests.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
         DefaultTableModel tableModel = (DefaultTableModel) purchaseRequestTable.getModel();
         tableModel.setRowCount(0);
-        showPurchaseRequests();
+        try {
+            showPurchaseRequests();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminPurchaseRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -144,9 +167,24 @@ public class adminPurchaseRequests extends javax.swing.JFrame {
         }
         resourceRequestList.remove(toBeRemoved);
         JOptionPane.showMessageDialog(rootPane, "The purchase request for " + selectedResource + " has been denied");
+        try {
+         FileOutputStream fileOut = new FileOutputStream("resourceRequests.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.resourceRequestList);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resourceRequests.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
         DefaultTableModel tableModel = (DefaultTableModel) purchaseRequestTable.getModel();
         tableModel.setRowCount(0);
-        showPurchaseRequests();
+        try {
+            showPurchaseRequests();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminPurchaseRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -179,12 +217,29 @@ public class adminPurchaseRequests extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new adminPurchaseRequests().setVisible(true);
+                try {
+                    new adminPurchaseRequests().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(adminPurchaseRequests.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     
-    private void showPurchaseRequests(){
+    private void showPurchaseRequests() throws ClassNotFoundException{
+        try {
+            FileInputStream fileIn = new FileInputStream("resourceRequests.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.resourceRequestList = (List<resources>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded resourceRequests");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        
         DefaultTableModel tableModel = (DefaultTableModel) purchaseRequestTable.getModel();
         
         Object rowData[] = new Object[2];

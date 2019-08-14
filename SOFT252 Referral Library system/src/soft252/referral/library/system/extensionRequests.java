@@ -5,6 +5,14 @@
  */
 package soft252.referral.library.system;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static soft252.referral.library.system.accountCreator.dueDateExtenstions;
@@ -20,7 +28,7 @@ public class extensionRequests extends javax.swing.JFrame {
     /**
      * Creates new form extensionRequests
      */
-    public extensionRequests() {
+    public extensionRequests() throws ClassNotFoundException {
         initComponents();
         showExtensionRequests();
     }
@@ -130,7 +138,11 @@ public class extensionRequests extends javax.swing.JFrame {
         }
         DefaultTableModel tableModel = (DefaultTableModel) extensionTable.getModel();
         tableModel.setRowCount(0);
-        showExtensionRequests();
+        try {
+            showExtensionRequests();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(extensionRequests.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -139,14 +151,50 @@ public class extensionRequests extends javax.swing.JFrame {
         int row = extensionTable.getSelectedRow();
         String selectedResource = extensionTable.getValueAt(row, 1).toString();
         String currentUser = extensionTable.getValueAt(row, 0).toString();
+        String removeFromExtensionRequest;
         for (Client user : userList){
             if (user.ID.equals(currentUser)){
                 for (resources resource : resourceList){
                     if (resource.title.equals(selectedResource)){
                         user.Reminders.add("Your extension request for " + selectedResource + " was denied");
+                        removeFromExtensionRequest = (user.ID + ":" + resource.title);
+                        accountCreator.dueDateExtenstions.remove(removeFromExtensionRequest);
                     }
                 }
             }
+        }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("dueDateExtensions.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.dueDateExtenstions);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\dueDateExtensions.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("users.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.userList);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\users.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("resources.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.resourceList);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resources.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -185,12 +233,54 @@ public class extensionRequests extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new extensionRequests().setVisible(true);
+                try {
+                    new extensionRequests().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(extensionRequests.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     
-    private void showExtensionRequests(){
+    private void showExtensionRequests() throws ClassNotFoundException{
+        
+        try {
+            FileInputStream fileIn = new FileInputStream("resources.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.resourceList = (List<resources>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded resources");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        try {
+            FileInputStream fileIn = new FileInputStream("users.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.userList = (List<Client>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded resources");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        try {
+            FileInputStream fileIn = new FileInputStream("dueDateExtensions.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            accountCreator.dueDateExtenstions = (List<String>) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("loaded dueDateExtensions");
+        } 
+        catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+        
         String userID;
         String resourceTitle;
         int listSize = dueDateExtenstions.size();

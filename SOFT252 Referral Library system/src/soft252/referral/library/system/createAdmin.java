@@ -136,7 +136,7 @@ public class createAdmin extends javax.swing.JFrame {
         }
         
         if (creationSuccessful.equals(true)){
-            accountCreator.createUser(adminID, password);
+            accountCreator.createAdmin(adminID, password);
             JOptionPane.showMessageDialog(rootPane, "New admin successfully created");
             dispose();
         }

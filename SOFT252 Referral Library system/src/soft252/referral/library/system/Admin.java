@@ -5,6 +5,7 @@
  */
 package soft252.referral.library.system;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,7 @@ import java.util.List;
  *
  * @author Gearing
  */
-public class Admin extends Client{
-    protected boolean adminPrivileges = true;
+public class Admin extends Client implements Serializable{
     
     
     Admin(String ID, String password){
