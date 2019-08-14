@@ -188,7 +188,7 @@ public class userBorrowedResources extends javax.swing.JFrame {
         
         Object rowData[] = new Object[4];
         
-        System.out.println("showBorrowedResources called successfully");
+        //System.out.println("showBorrowedResources called successfully");
         
         for (Client user : userList){
             //System.out.println("------------------");
@@ -215,7 +215,6 @@ public class userBorrowedResources extends javax.swing.JFrame {
         int column = 1;
         int row = userBorrowed.getSelectedRow();
         String selectedResource = userBorrowed.getValueAt(row, column).toString();
-        System.out.println(selectedResource);
         
         String removeFromExtensionRequest;
         

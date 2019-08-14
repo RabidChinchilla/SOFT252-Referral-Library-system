@@ -22,6 +22,8 @@ public class accountCreator {
     
     protected static List<String> dueDateExtenstions = new ArrayList();
     
+    protected static List<resources> newResourceList = new ArrayList();
+    
     private static accountCreator instance = new accountCreator();
     
     private accountCreator(){}
@@ -44,6 +46,7 @@ public class accountCreator {
     public static void createResource(String catagorey, String title, String type, boolean borrowed, String borrowType){
         resources resource = new resources(catagorey, title, type, borrowed, borrowType);
         resourceList.add(resource);
+        newResourceList.add(resource);
     }
     
     public static void createResourceRequest(String title, String type){
