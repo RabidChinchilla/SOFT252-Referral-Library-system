@@ -280,28 +280,99 @@ public class userBorrowedResources extends javax.swing.JFrame {
                                     String newLateFee = formatedLateFee.format(lateFee);
                                     int a = JOptionPane.showConfirmDialog(rootPane, "You have a late fee of £" + (newLateFee) + " You must pay it to return this resource", "Late Return", JOptionPane.YES_NO_OPTION);
                                     if (a == JOptionPane.YES_OPTION){
-                                        //user.resourcesBorrowed.remove(resourceBorrowed);
+                                        user.resourcesBorrowed.remove(resourceBorrowed);
                                         toBeRemoved = resourceBorrowed;
                                         //System.out.println(user.resourcesBorrowed);
+                                        originalResource.borrowed = false;
+                                        originalResource.daysBorrowed = 0;
+                                        removeFromExtensionRequest = (user.ID + ":" + originalResource.title);
+                                        accountCreator.dueDateExtenstions.remove(removeFromExtensionRequest);
+                                        try {
+                                            FileOutputStream fileOut = new FileOutputStream("users.ser");
+                                            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                                            out.writeObject(accountCreator.userList);
+                                            out.close();
+                                            fileOut.close();
+                                            System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\users.ser");
+                                        } 
+                                        catch (IOException i) {
+                                            i.printStackTrace();
+                                        }
+                                        try {
+                                            FileOutputStream fileOut = new FileOutputStream("resources.ser");
+                                            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                                            out.writeObject(accountCreator.resourceList);
+                                            out.close();
+                                            fileOut.close();
+                                            System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resources.ser");
+                                        } 
+                                        catch (IOException i) {
+                                            i.printStackTrace();
+                                        }
+                                        try {
+                                            FileOutputStream fileOut = new FileOutputStream("dueDateExtensions.ser");
+                                            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                                            out.writeObject(accountCreator.dueDateExtenstions);
+                                            out.close();
+                                            fileOut.close();
+                                            System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\dueDateExtensions.ser");
+                                        } 
+                                        catch (IOException i) {
+                                            i.printStackTrace();
+                                        }
                                         DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
                                         tableModel.setRowCount(0);
                                         showBorrowedResources(currentUser);
-                                        removeFromExtensionRequest = (user.ID + ":" + originalResource.title);
-                                        accountCreator.dueDateExtenstions.remove(removeFromExtensionRequest);
                                     }
                                     else if (a == JOptionPane.NO_OPTION){
                                         JOptionPane.showMessageDialog(rootPane, "Late fee not paid, book will remain with you until you can pay the late fee");
                                     }
                                 }
                                 else{
-                                    //user.resourcesBorrowed.remove(resourceBorrowed);
+                                    user.resourcesBorrowed.remove(resourceBorrowed);
                                     toBeRemoved = resourceBorrowed;
+                                    originalResource.borrowed = false;
+                                    originalResource.daysBorrowed = 0;
                                     //System.out.println(user.resourcesBorrowed);
-                                    DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
-                                    tableModel.setRowCount(0);
-                                    showBorrowedResources(currentUser);
                                     removeFromExtensionRequest = (user.ID + ":" + originalResource.title);
                                     accountCreator.dueDateExtenstions.remove(removeFromExtensionRequest);
+                                    try {
+                                        FileOutputStream fileOut = new FileOutputStream("users.ser");
+                                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                                        out.writeObject(accountCreator.userList);
+                                        out.close();
+                                        fileOut.close();
+                                        System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\users.ser");
+                                       } 
+                                       catch (IOException i) {
+                                        i.printStackTrace();
+                                       }
+                                       try {
+                                        FileOutputStream fileOut = new FileOutputStream("resources.ser");
+                                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                                        out.writeObject(accountCreator.resourceList);
+                                        out.close();
+                                        fileOut.close();
+                                        System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resources.ser");
+                                       } 
+                                       catch (IOException i) {
+                                        i.printStackTrace();
+                                       }
+                                       try {
+                                        FileOutputStream fileOut = new FileOutputStream("dueDateExtensions.ser");
+                                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                                        out.writeObject(accountCreator.dueDateExtenstions);
+                                        out.close();
+                                        fileOut.close();
+                                        System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\dueDateExtensions.ser");
+                                       } 
+                                       catch (IOException i) {
+                                        i.printStackTrace();
+                                       }
+                                    DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
+                                    tableModel.setRowCount(0);
+                                    System.out.println("table reset");
+                                    showBorrowedResources(currentUser);
                                 }
                             }
                         }
@@ -310,32 +381,42 @@ public class userBorrowedResources extends javax.swing.JFrame {
             }
             user.resourcesBorrowed.remove(toBeRemoved);
         }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("users.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.userList);
+         out.close();
+         fileOut.close();
+         System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\users.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("resources.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.resourceList);
+         out.close();
+         fileOut.close();
+         System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resources.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("dueDateExtensions.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.dueDateExtenstions);
+         out.close();
+         fileOut.close();
+         System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\dueDateExtensions.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
+        }
         DefaultTableModel tableModel = (DefaultTableModel) userBorrowed.getModel();
         tableModel.setRowCount(0);
         showBorrowedResources(currentUser);
-        try {
-            FileInputStream fileIn = new FileInputStream("users.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            accountCreator.userList = (List<Client>) in.readObject();
-            in.close();
-            fileIn.close();
-            System.out.println("rewritten users");
-        } 
-        catch (IOException i) {
-            i.printStackTrace();
-            return;
-        }
-        try {
-            FileInputStream fileIn = new FileInputStream("resources.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            accountCreator.resourceList = (List<resources>) in.readObject();
-            in.close();
-            fileIn.close();
-        } 
-        catch (IOException i) {
-            i.printStackTrace();
-            return;
-        }
     }
     
     private void rateResource(){
@@ -364,6 +445,17 @@ public class userBorrowedResources extends javax.swing.JFrame {
                     }
                 }
             }
+        }
+        try {
+         FileOutputStream fileOut = new FileOutputStream("resources.ser");
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(accountCreator.resourceList);
+         out.close();
+         fileOut.close();
+         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resources.ser");
+        } 
+        catch (IOException i) {
+         i.printStackTrace();
         }
     }
     

@@ -5,6 +5,8 @@
  */
 package soft252.referral.library.system;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static soft252.referral.library.system.accountCreator.newResourceList;
 import static soft252.referral.library.system.accountCreator.userList;
@@ -200,8 +202,12 @@ public class adminFunctions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        new extensionRequests().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new extensionRequests().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -211,8 +217,12 @@ public class adminFunctions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        new adminPurchaseRequests().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new adminPurchaseRequests().setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

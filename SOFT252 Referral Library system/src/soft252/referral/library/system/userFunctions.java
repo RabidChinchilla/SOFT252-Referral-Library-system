@@ -5,6 +5,8 @@
  */
 package soft252.referral.library.system;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static soft252.referral.library.system.accountCreator.adminList;
@@ -151,14 +153,22 @@ public class userFunctions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        new borrowResource(currentUser).setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new borrowResource(currentUser).setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(userFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println(currentUser);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        new userBorrowedResources(currentUser).setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new userBorrowedResources(currentUser).setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(userFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println(currentUser);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -174,8 +184,12 @@ public class userFunctions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        new userReminders(currentUser).setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new userReminders(currentUser).setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(userFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

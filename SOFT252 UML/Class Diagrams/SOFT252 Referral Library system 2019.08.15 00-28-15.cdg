@@ -2,12 +2,14 @@
 
 <ClassDiagram name="SOFT252 Referral Library system">
   <ClassDiagramComponents>
-    <Class name="accountCreator" package="soft252.referral.library.system" visibility="public" xPosition="20.0" yPosition="20.0">
+    <Class name="accountCreator" package="soft252.referral.library.system" visibility="public" xPosition="126.0" yPosition="390.0">
       <Fields>
         <Field name="userList" type="List&lt;Client&gt;" visibility="protected" isStatic="true"/>
         <Field name="adminList" type="List&lt;Admin&gt;" visibility="protected" isStatic="true"/>
         <Field name="resourceList" type="List&lt;resources&gt;" visibility="protected" isStatic="true"/>
-        <Field name="dueDateExtenstions" type="List&lt;Object&gt;" visibility="protected" isStatic="true"/>
+        <Field name="resourceRequestList" type="List&lt;resources&gt;" visibility="protected" isStatic="true"/>
+        <Field name="dueDateExtenstions" type="List&lt;String&gt;" visibility="protected" isStatic="true"/>
+        <Field name="newResourceList" type="List&lt;resources&gt;" visibility="protected" isStatic="true"/>
         <Field name="instance" type="accountCreator" visibility="private" isStatic="true"/>
       </Fields>
       <Constructors>
@@ -30,12 +32,14 @@
           <Argument type="boolean" name="borrowed"/>
           <Argument type="String" name="borrowType"/>
         </Method>
+        <Method name="createResourceRequest" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="title"/>
+          <Argument type="String" name="type"/>
+        </Method>
       </Methods>
     </Class>
-    <Class name="Admin" package="soft252.referral.library.system" visibility="public" xPosition="320.0" yPosition="20.0">
-      <Fields>
-        <Field name="adminPrivileges" type="boolean" visibility="protected"/>
-      </Fields>
+    <Class name="Admin" package="soft252.referral.library.system" visibility="public" xPosition="254.0" yPosition="77.0">
+      <Fields/>
       <Constructors>
         <Constructor visibility="package">
           <Argument type="String" name="ID"/>
@@ -44,20 +48,28 @@
       </Constructors>
       <Methods/>
     </Class>
-    <Class name="adminFunctions" package="soft252.referral.library.system" visibility="public" xPosition="620.0" yPosition="20.0">
+    <Class name="adminFunctions" package="soft252.referral.library.system" visibility="public" xPosition="3142.0" yPosition="1208.0">
       <Fields>
+        <Field name="currentAdmin" type="String" visibility="package"/>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton3" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton6" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton7" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton8" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton9" type="javax.swing.JButton" visibility="private"/>
         <Field name="welcomeMsg" type="javax.swing.JLabel" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="adminID"/>
+        </Constructor>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -70,12 +82,27 @@ void" visibility="private"/>
         <Method name="jButton4ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
+        <Method name="jButton5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton7ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton8ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton9ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
         <Method name="main" returnType="void" visibility="public" isStatic="true">
           <Argument type="String" name="args"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="adminLogIn" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="20.0">
+    <Class name="adminLogIn" package="soft252.referral.library.system" visibility="public" xPosition="3142.0" yPosition="829.0">
       <Fields>
         <Field name="adminIDText" type="javax.swing.JTextField" visibility="private"/>
         <Field name="adminPasswordField" type="javax.swing.JPasswordField" visibility="private"/>
@@ -89,8 +116,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton2ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -102,7 +128,35 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="borrowResource" package="soft252.referral.library.system" visibility="public" xPosition="1220.0" yPosition="20.0">
+    <Class name="adminPurchaseRequests" package="soft252.referral.library.system" visibility="public" xPosition="3142.0" yPosition="449.0">
+      <Fields>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="purchaseRequestTable" type="javax.swing.JTable" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jButton3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="showPurchaseRequests" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="borrowResource" package="soft252.referral.library.system" visibility="public" xPosition="2045.0" yPosition="48.0">
       <Fields>
         <Field name="currentUser" type="String" visibility="package"/>
         <Field name="selectedBook" type="resources" visibility="package"/>
@@ -119,8 +173,7 @@ void" visibility="private"/>
         </Constructor>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -134,7 +187,7 @@ void" visibility="private"/>
         <Method name="getSelected" returnType="void" visibility="protected"/>
       </Methods>
     </Class>
-    <Class name="Client" package="soft252.referral.library.system" visibility="public" xPosition="1520.0" yPosition="20.0">
+    <Class name="Client" package="soft252.referral.library.system" visibility="public" xPosition="652.0" yPosition="77.0">
       <Fields>
         <Field name="ID" type="String" visibility="protected"/>
         <Field name="password" type="String" visibility="protected"/>
@@ -149,7 +202,7 @@ void" visibility="private"/>
       </Constructors>
       <Methods/>
     </Class>
-    <Class name="createAdmin" package="soft252.referral.library.system" visibility="public" xPosition="1820.0" yPosition="20.0">
+    <Class name="createAdmin" package="soft252.referral.library.system" visibility="public" xPosition="3142.0" yPosition="39.0">
       <Fields>
         <Field name="adminPasswordField" type="javax.swing.JPasswordField" visibility="private"/>
         <Field name="adminUsernameField" type="javax.swing.JTextField" visibility="private"/>
@@ -163,8 +216,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -176,7 +228,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="createUser" package="soft252.referral.library.system" visibility="public" xPosition="2120.0" yPosition="20.0">
+    <Class name="createUser" package="soft252.referral.library.system" visibility="public" xPosition="214.0" yPosition="1140.0">
       <Fields>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
@@ -190,8 +242,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -203,7 +254,35 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="firstFrame" package="soft252.referral.library.system" visibility="public" xPosition="20.0" yPosition="420.0">
+    <Class name="extensionRequests" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="902.0">
+      <Fields>
+        <Field name="extensionTable" type="javax.swing.JTable" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton3" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="showExtensionRequests" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="firstFrame" package="soft252.referral.library.system" visibility="public" xPosition="232.0" yPosition="808.0">
       <Fields>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
@@ -214,8 +293,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -227,7 +305,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="newResource" package="soft252.referral.library.system" visibility="public" xPosition="320.0" yPosition="420.0">
+    <Class name="newResource" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="491.0">
       <Fields>
         <Field name="borrowType" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
         <Field name="categoryList" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
@@ -244,8 +322,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -257,7 +334,61 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="resourceList" package="soft252.referral.library.system" visibility="public" xPosition="620.0" yPosition="420.0">
+    <Class name="purchaseRequest" package="soft252.referral.library.system" visibility="public" xPosition="1636.0" yPosition="548.0">
+      <Fields>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="resourceTitleField" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="resourceTypeField" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jButton2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Reminders" package="soft252.referral.library.system" visibility="public" xPosition="2376.0" yPosition="449.0">
+      <Fields>
+        <Field name="adminRemindersTable" type="javax.swing.JTable" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton4ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="showUsersAndResources" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="resourceList" package="soft252.referral.library.system" visibility="public" xPosition="1636.0" yPosition="902.0">
       <Fields>
         <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
         <Field name="resourceTable" type="javax.swing.JTable" visibility="private"/>
@@ -266,15 +397,14 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="main" returnType="void" visibility="public" isStatic="true">
           <Argument type="String" name="args"/>
         </Method>
         <Method name="showResources" returnType="void" visibility="private"/>
       </Methods>
     </Class>
-    <Class name="resources" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="420.0">
+    <Class name="resources" package="soft252.referral.library.system" visibility="public" xPosition="1246.0" yPosition="115.0">
       <Fields>
         <Field name="catagorey" type="String" visibility="protected"/>
         <Field name="title" type="String" visibility="protected"/>
@@ -295,7 +425,7 @@ void" visibility="private"/>
       </Constructors>
       <Methods/>
     </Class>
-    <Class name="SOFT252ReferralLibrarySystem" package="soft252.referral.library.system" visibility="public" xPosition="1220.0" yPosition="420.0">
+    <Class name="SOFT252ReferralLibrarySystem" package="soft252.referral.library.system" visibility="public" xPosition="620.0" yPosition="1482.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -304,7 +434,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="userBorrowedResources" package="soft252.referral.library.system" visibility="public" xPosition="1520.0" yPosition="420.0">
+    <Class name="userBorrowedResources" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="1255.0">
       <Fields>
         <Field name="currentUser" type="String" visibility="package"/>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
@@ -321,8 +451,7 @@ void" visibility="private"/>
         </Constructor>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -346,12 +475,15 @@ void" visibility="private"/>
         <Method name="requestExtension" returnType="void" visibility="private"/>
       </Methods>
     </Class>
-    <Class name="userFunctions" package="soft252.referral.library.system" visibility="public" xPosition="1820.0" yPosition="420.0">
+    <Class name="userFunctions" package="soft252.referral.library.system" visibility="public" xPosition="1636.0" yPosition="1140.0">
       <Fields>
         <Field name="currentUser" type="String" visibility="package"/>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton3" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton4" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton5" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton6" type="javax.swing.JButton" visibility="private"/>
         <Field name="welcomeMsg" type="javax.swing.JLabel" visibility="private"/>
       </Fields>
       <Constructors>
@@ -361,8 +493,7 @@ void" visibility="private"/>
         </Constructor>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -372,12 +503,21 @@ void" visibility="private"/>
         <Method name="jButton4ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
+        <Method name="jButton3ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton5ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton6ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
         <Method name="main" returnType="void" visibility="public" isStatic="true">
           <Argument type="String" name="args"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="userLogIn" package="soft252.referral.library.system" visibility="public" xPosition="2120.0" yPosition="420.0">
+    <Class name="userLogIn" package="soft252.referral.library.system" visibility="public" xPosition="2376.0" yPosition="1140.0">
       <Fields>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
         <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
@@ -391,8 +531,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jButton2ActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -404,14 +543,44 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
+    <Class name="userReminders" package="soft252.referral.library.system" visibility="public" xPosition="2376.0" yPosition="788.0">
+      <Fields>
+        <Field name="currentUser" type="String" visibility="package"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton2" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="remindersTable" type="javax.swing.JTable" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="userID"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton2ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="showReminders" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <IsRelation name="is" source="soft252.referral.library.system.Admin" target="soft252.referral.library.system.Client"/>
-    <HasRelation name="userList" source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.Client" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Client&gt;"/>
-    <HasRelation name="adminList" source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.Admin" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Admin&gt;"/>
     <HasRelation name="resourceList" source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.resources" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;resources&gt;"/>
+    <HasRelation name="userList" source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.Client" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Client&gt;"/>
+    <HasRelation name="newResourceList" source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.resources" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;resources&gt;"/>
+    <HasRelation name="resourceRequestList" source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.resources" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;resources&gt;"/>
+    <IsRelation name="is" source="soft252.referral.library.system.Admin" target="soft252.referral.library.system.Client"/>
+    <HasRelation name="adminList" source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.Admin" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Admin&gt;"/>
+    <HasRelation name="selectedBook" source="soft252.referral.library.system.borrowResource" target="soft252.referral.library.system.resources" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="instance" source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.accountCreator" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="soft252.referral.library.system.accountCreator" target="soft252.referral.library.system.accountCreator" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="selectedBook" source="soft252.referral.library.system.borrowResource" target="soft252.referral.library.system.resources" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

@@ -218,7 +218,7 @@ public class borrowResource extends javax.swing.JFrame {
         }
         
         DefaultTableModel tableModel = (DefaultTableModel) availableResources.getModel();
-        
+        tableModel.setRowCount(0);
         Object rowData[] = new Object[4];
         
         for (resources resource : resourceList){
@@ -230,7 +230,6 @@ public class borrowResource extends javax.swing.JFrame {
                 tableModel.addRow(rowData);
             }
         }
-        
     }
     
     protected void getSelected() throws ClassNotFoundException{
@@ -290,7 +289,7 @@ public class borrowResource extends javax.swing.JFrame {
          out.writeObject(accountCreator.userList);
          out.close();
          fileOut.close();
-         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\users.ser");
+         System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\users.ser");
         } 
         catch (IOException i) {
          i.printStackTrace();
@@ -301,7 +300,7 @@ public class borrowResource extends javax.swing.JFrame {
          out.writeObject(accountCreator.resourceList);
          out.close();
          fileOut.close();
-         System.out.printf("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resources.ser");
+         System.out.println("Serialized data is saved in SOFT252-Referral-Library-system\\SOFT252 Referral Library system\\resources.ser");
         } 
         catch (IOException i) {
          i.printStackTrace();
