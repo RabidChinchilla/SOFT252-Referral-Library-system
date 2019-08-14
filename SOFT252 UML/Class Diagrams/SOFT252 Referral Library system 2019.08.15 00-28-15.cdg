@@ -254,7 +254,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="extensionRequests" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="902.0">
+    <Class name="extensionRequests" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="971.0">
       <Fields>
         <Field name="extensionTable" type="javax.swing.JTable" visibility="private"/>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
@@ -305,7 +305,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="newResource" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="491.0">
+    <Class name="newResource" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="548.0">
       <Fields>
         <Field name="borrowType" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
         <Field name="categoryList" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
@@ -434,7 +434,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="userBorrowedResources" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="1255.0">
+    <Class name="userBorrowedResources" package="soft252.referral.library.system" visibility="public" xPosition="920.0" yPosition="1349.0">
       <Fields>
         <Field name="currentUser" type="String" visibility="package"/>
         <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
