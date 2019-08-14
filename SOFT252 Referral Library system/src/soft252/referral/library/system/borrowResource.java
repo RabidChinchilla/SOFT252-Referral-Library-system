@@ -194,15 +194,28 @@ public class borrowResource extends javax.swing.JFrame {
         int column = 1;
         int row = availableResources.getSelectedRow();
         String selectedResource = availableResources.getValueAt(row, column).toString();
-        System.out.println(selectedResource);
+        //System.out.println(selectedResource);
+        boolean canBorrow = true;
+        
+        for (Client user : userList){
+            if (user.ID.equals(currentUser)){
+                for (Object resourceBorrowed : user.resourcesBorrowed){
+                    for (resources resource : resourceList){
+                        if (resourceBorrowed.equals(resource.title) && resource.daysBorrowed < -20){
+                            canBorrow = false;
+                        }
+                    }
+                }
+            }
+        }
         
         for (resources resource : resourceList){
             if (resource.title.equals(selectedResource)){
-                System.out.println("Resource Match");
-                System.out.println(currentUser);
+                //System.out.println("Resource Match");
+                //System.out.println(currentUser);d
                 for (Client user : userList){
-                    if (user.ID.equals(currentUser)){
-                        System.out.println("Client Match");
+                    if (user.ID.equals(currentUser) && canBorrow == true){
+                        //System.out.println("Client Match");
                         if ("Short Term".equals(resource.borrowedType)){
                             resource.borrowed = true;
                             resource.daysBorrowed = 14;
@@ -221,6 +234,9 @@ public class borrowResource extends javax.swing.JFrame {
                         }
                         //user.resourcesBorrowed.add(resource.title);
                         //System.out.println(user.resourcesBorrowed);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(rootPane, "You have a resource overdue by 20 days or more, you cannot take out anymore resources");
                     }
                 }
             }

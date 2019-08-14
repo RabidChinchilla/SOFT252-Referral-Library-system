@@ -67,7 +67,7 @@ public class SOFT252ReferralLibrarySystem {
                 for (resources resource : resourceList){
                     if (resource.title.equals("Of Mice and Men")){
                         resource.borrowed = true;
-                        resource.daysBorrowed = -7;
+                        resource.daysBorrowed = -30;
                     }
                 }
             }
