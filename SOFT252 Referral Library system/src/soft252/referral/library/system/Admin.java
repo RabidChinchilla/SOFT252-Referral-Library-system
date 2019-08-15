@@ -16,7 +16,7 @@ import java.util.List;
 public class Admin extends Client implements Serializable{
     
     
-    Admin(String ID, String password){
+    public Admin(String ID, String password){
         super(ID, password);
     }
     

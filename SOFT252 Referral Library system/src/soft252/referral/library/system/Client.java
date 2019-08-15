@@ -15,13 +15,13 @@ import java.util.List;
  */
 public class Client implements Serializable{
     
-    protected String ID;
-    protected String password;
+    public String ID;
+    public String password;
     
     List<Object> resourcesBorrowed = new ArrayList();
     List<Object> Reminders = new ArrayList();
     
-    Client(String ID, String password){
+    public Client(String ID, String password){
         this.ID = ID;
         this.password = password;
         //this.resourcesBorrowed ;

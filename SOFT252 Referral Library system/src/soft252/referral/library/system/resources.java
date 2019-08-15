@@ -12,17 +12,17 @@ import java.io.Serializable;
  * @author Gearing
  */
 public class resources implements Serializable{
-    protected String catagorey;
+    public String catagorey;
     //protected String resourceID;
-    protected String title;
-    protected String resourceType;
-    protected boolean borrowed;
-    protected String borrowedType;
-    protected int daysBorrowed = 0;
-    protected int rating = 0;
+    public String title;
+    public String resourceType;
+    public boolean borrowed;
+    public String borrowedType;
+    public int daysBorrowed = 0;
+    public int rating = 0;
     
     
-    resources(String catagorey, String title, String type, boolean isBorrowed, String borrowTy){
+    public resources(String catagorey, String title, String type, boolean isBorrowed, String borrowTy){
         this.catagorey = catagorey;
         //this.resourceID = ID;
         this.title = title;
