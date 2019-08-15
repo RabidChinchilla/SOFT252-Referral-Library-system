@@ -1,0 +1,4 @@
+https://github.com/RabidChinchilla/SOFT252-Referral-Library-system
+
+There are 2 branches so i could have 2 stable builds of the project
+Both work and are vaild for the submission
